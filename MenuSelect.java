@@ -11,7 +11,7 @@ import java.awt.event.*;
 public class MenuSelect extends JPanel
 {
     /** description of instance variable x (add comment for each instance variable) */
-    private JButton insert;
+    private JButton add;
     private JButton update;
     private JButton delete;
     private JButton view;
@@ -21,28 +21,28 @@ public class MenuSelect extends JPanel
     public MenuSelect()
     {
         // initialise instance variables
-        this.insert = new JButton("Insert");
+        this.add = new JButton("Add");
         this.update = new JButton("Update");
         this.delete = new JButton("Delete");
         this.view = new JButton("View");
         
-        this.insert.addActionListener(new Insert());
+        this.add.addActionListener(new Add());
         this.update.addActionListener(new Update());
         this.delete.addActionListener(new Delete());
+        this.view.addActionListener(new View());
         
         
-        
-        this.add(this.insert);
+        this.add(this.add);
         this.add(this.update);
         this.add(this.delete);
         this.add(this.view);
     }
     
-    public class Insert implements ActionListener
+    public class Add implements ActionListener
     {
         public void actionPerformed(ActionEvent event)
         {
-            
+            AddScreen addScreen = new AddScreen();
         }
     }
     
@@ -58,7 +58,7 @@ public class MenuSelect extends JPanel
     {
         public void actionPerformed(ActionEvent event)
         {
-            
+            DeleteScreen delScreen = new DeleteScreen();
         }
     }
     
@@ -66,7 +66,7 @@ public class MenuSelect extends JPanel
     {
         public void actionPerformed(ActionEvent event)
         {
-            
+            ViewScreen viewScreen = new ViewScreen();
         }
     }
 }
