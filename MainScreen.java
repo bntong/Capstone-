@@ -11,7 +11,7 @@ import java.util.*;
 public class MainScreen extends JFrame
 {
     // The variables that determine the width and height of the frame
-    private static final int FRAME_WIDTH = 500;
+    private static final int FRAME_WIDTH = 470;
     private static final int FRAME_HEIGHT = 200;
     
     private static MainScreen mainScreen;
@@ -41,6 +41,7 @@ public class MainScreen extends JFrame
     {
         return this.musicList;
     }
+    
     public static void main(String[] args)
     {
         mainScreen = new MainScreen();

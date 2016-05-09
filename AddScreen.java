@@ -30,6 +30,7 @@ public class AddScreen extends JFrame implements ActionListener
     private String tempo = "0";
     private String key = "C";
     private String mode = "None";
+    private String str;
     
     private JTextField titleField = new JTextField(15);
     private JTextField tempoField = new JTextField(15);
@@ -44,10 +45,11 @@ public class AddScreen extends JFrame implements ActionListener
     /**
      * Default constructor for objects of class Add
      */
-    public AddScreen(MainScreen mainScreen,int rownum)
+    public AddScreen(MainScreen mainScreen,int rownum , String str)
     {
         panel.setLayout(new FlowLayout(-2));
         
+        this.str = str;
         this.mainScreen = mainScreen;
         
         this.setTitle("Add Screen");
@@ -73,7 +75,7 @@ public class AddScreen extends JFrame implements ActionListener
                     musiclist.get(selectedRowNum).setMode(getMode());
                     musiclist.get(selectedRowNum).setKey(getKey());
                 }
-                    dispose();
+                dispose();
             }
         });
         
@@ -99,6 +101,34 @@ public class AddScreen extends JFrame implements ActionListener
                 this.keyCmbList.setSelectedItem(musiclist.get(rownum).getKey());
             }
         }
+        else if(!str.equals(" "))
+        {
+            ArrayList<MusicSheet> musicList = this.mainScreen.getMusicList();
+            ArrayList<MusicSheet> tempList = new ArrayList<MusicSheet>();
+            String keyword = str;
+            ArrayList<String> substrings = new ArrayList<String>();
+            for(int i = 0; i < keyword.length(); i++)
+            {
+                for(int j = 1; i <= keyword.length()-i; j++)
+                {
+                    String sub = keyword.substring(i , j+1);
+                    substrings.add(sub);
+                }
+            }
+            
+            for(int i = 0; i < musicList.size(); i++)
+            {
+                if(musicList.get(i).equals(substrings.get(i)))
+                {
+                    tempList.add(musicList.get(i));
+                }
+            }
+            
+            SearchViewScreen searchViewScreen = new SearchViewScreen(tempList);
+        }
+        
+            
+        
         
         panel.setLayout(new FlowLayout(-2));
         panel.add(titleQuestion);

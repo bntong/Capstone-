@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=mainScreen\ rownum
-comment0.target=AddScreen(MainScreen,\ int)
+comment0.params=mainScreen\ rownum\ str
+comment0.target=AddScreen(MainScreen,\ int,\ java.lang.String)
 comment0.text=\r\n\ Default\ constructor\ for\ objects\ of\ class\ Add\r\n
 comment1.params=e
 comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)

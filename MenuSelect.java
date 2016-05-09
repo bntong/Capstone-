@@ -16,8 +16,10 @@ public class MenuSelect extends JPanel
     private JButton view;
     private JButton edit;
     private JTextField rownum;
+    private JTextField search;
     private JLabel editquestion;
     private JLabel question;
+    private JLabel searchQuestion;
     
     private MainScreen mainScreen;
     /**
@@ -33,10 +35,12 @@ public class MenuSelect extends JPanel
         this.view = new JButton("View");
         this.edit = new JButton("Edit");
         this.rownum = new JTextField(15);
+        this.search = new JTextField(15);
         
         this.question = new JLabel("What would you like to do?");
-        this.editquestion = new JLabel("What row do you want to edit?");
-
+        this.editquestion = new JLabel("Which index would you like to edit?");
+        this.searchQuestion = new JLabel("Search by keyword:");
+        
         this.add.addActionListener(new Add());
         this.view.addActionListener(new View());
         this.edit.addActionListener(new Update());
@@ -44,10 +48,11 @@ public class MenuSelect extends JPanel
         this.add(this.question);
         this.add(this.add);
         this.add(this.view);
-        
         this.add(this.editquestion);
         this.add(this.edit);
         this.add(this.rownum);
+        this.add(this.searchQuestion);
+        this.add(this.search);
 
     }
 
@@ -55,7 +60,7 @@ public class MenuSelect extends JPanel
     {
         public void actionPerformed(ActionEvent event)
         {
-            AddScreen addScreen = new AddScreen(mainScreen,-1);
+            AddScreen addScreen = new AddScreen(mainScreen,-1, " ");
         }
     }
 
@@ -63,7 +68,7 @@ public class MenuSelect extends JPanel
     {
         public void actionPerformed(ActionEvent event)
         {
-            AddScreen addScreen = new AddScreen(mainScreen,getRowNum());
+            AddScreen addScreen = new AddScreen(mainScreen,getRowNum() , getKeyword());
         }
     }
 
@@ -83,6 +88,7 @@ public class MenuSelect extends JPanel
             
         }
     }
+    
     public int getRowNum()
     {
         try
@@ -94,5 +100,11 @@ public class MenuSelect extends JPanel
         {
             return 0;
         }
+    }
+    
+    public String getKeyword()
+    {        
+            String str = search.getText();
+            return str;
     }
 }
