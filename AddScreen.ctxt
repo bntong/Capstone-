@@ -1,5 +1,19 @@
 #BlueJ class context
-comment0.params=
-comment0.target=AddScreen()
+comment0.params=mainScreen\ rownum
+comment0.target=AddScreen(MainScreen,\ int)
 comment0.text=\r\n\ Default\ constructor\ for\ objects\ of\ class\ Add\r\n
-numComments=1
+comment1.params=e
+comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment2.params=e
+comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment3.params=
+comment3.target=java.lang.String\ getPieceTitle()
+comment4.params=
+comment4.target=java.lang.String\ getTempo()
+comment5.params=
+comment5.target=java.lang.String\ getKey()
+comment6.params=
+comment6.target=java.lang.String\ getMode()
+comment7.params=
+comment7.target=MusicSheet\ getMusicSheet()
+numComments=8

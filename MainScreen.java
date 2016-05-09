@@ -1,5 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
+import java.util.*;
 
 /**
  * Write a description of class Viewer here.
@@ -16,23 +17,30 @@ public class MainScreen extends JFrame
     private static MainScreen mainScreen;
     private MenuSelect menu;
     
-    private JLabel question;
+    private ArrayList<MusicSheet> musicList = new ArrayList<MusicSheet>();
     /**
      * Default constructor for objects of class Viewer
      */
     public MainScreen()
     {
-        this.question = new JLabel("What would you like to do?");
-        this.menu = new MenuSelect();
+        this.menu = new MenuSelect(this);
         this.setLayout(new BorderLayout());
         this.setSize(FRAME_WIDTH , FRAME_HEIGHT);
-        this.add(menu , BorderLayout.SOUTH);
-        this.add(this.question , BorderLayout.NORTH);
+        this.add(menu);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Music Sheet Sorter");
         this.setVisible(true);
     }
     
+    public void addMusicSheet(MusicSheet musicSheet)
+    {
+        musicList.add(musicSheet);
+    }
+    
+    public ArrayList<MusicSheet> getMusicList()
+    {
+        return this.musicList;
+    }
     public static void main(String[] args)
     {
         mainScreen = new MainScreen();

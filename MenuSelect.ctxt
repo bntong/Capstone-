@@ -1,5 +1,7 @@
 #BlueJ class context
-comment0.params=
-comment0.target=MenuSelect()
+comment0.params=mainScreen
+comment0.target=MenuSelect(MainScreen)
 comment0.text=\r\n\ Default\ constructor\ for\ objects\ of\ class\ MenuSelect\r\n
-numComments=1
+comment1.params=
+comment1.target=int\ getRowNum()
+numComments=2

@@ -11,17 +11,20 @@ public class MusicSheet
     /** description of instance variable x (add comment for each instance variable) */
     private String key;
     private String title;
-    private int tempo;
+    private String tempo;
+    private String mode;
+    private int primaryKey;
 
     /**
      * Default constructor for objects of class MusicSheet
      */
-    public MusicSheet(String key , String title , int tempo)
+    public MusicSheet(String key , String title , String tempo , String mode)
     {
         // initialise instance variables
         this.key = key;
         this.title = title;
         this.tempo = tempo;
+        this.mode = mode;
     }
 
     /**
@@ -35,7 +38,7 @@ public class MusicSheet
      * @param    y    description of parameter y
      * @return    description of the return value
      */
-    public int getTempo()
+    public String getTempo()
     {
         // put your code here
         return this.tempo;
@@ -50,5 +53,28 @@ public class MusicSheet
     {
         return this.title;
     }
+    
+    public String getMode()
+    {
+        return this.mode;
+    }
+    
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+    public void setTempo(String tempo)
+    {
+        this.tempo = tempo;
+    }
+    public void setMode(String mode)
+    {
+        this.mode = mode;
+    }
+    public void setKey(String key)
+    {
+        this.key = key;
+    }
 
 }
+

@@ -1,12 +1,22 @@
 #BlueJ class context
-comment0.params=key\ title\ tempo
-comment0.target=MusicSheet(java.lang.String,\ java.lang.String,\ int)
+comment0.params=key\ title\ tempo\ mode
+comment0.target=MusicSheet(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
 comment0.text=\r\n\ Default\ constructor\ for\ objects\ of\ class\ MusicSheet\r\n
 comment1.params=
-comment1.target=int\ getTempo()
+comment1.target=java.lang.String\ getTempo()
 comment1.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\ \ \ \ that\ describes\ the\ operation\ of\ the\ method\r\n\r\n\ @pre\ \ \ \ \ \ \ \ preconditions\ for\ the\ method\r\n\ \ \ \ \ \ \ \ \ \ \ \ (what\ the\ method\ assumes\ about\ the\ method's\ parameters\ and\ class's\ state)\r\n\ @post\ \ \ \ postconditions\ for\ the\ method\r\n\ \ \ \ \ \ \ \ \ \ \ \ (what\ the\ method\ guarantees\ upon\ completion)\r\n\ @param\ \ \ \ y\ \ \ \ description\ of\ parameter\ y\r\n\ @return\ \ \ \ description\ of\ the\ return\ value\r\n
 comment2.params=
 comment2.target=java.lang.String\ getKey()
 comment3.params=
 comment3.target=java.lang.String\ getTitle()
-numComments=4
+comment4.params=
+comment4.target=java.lang.String\ getMode()
+comment5.params=title
+comment5.target=void\ setTitle(java.lang.String)
+comment6.params=tempo
+comment6.target=void\ setTempo(java.lang.String)
+comment7.params=mode
+comment7.target=void\ setMode(java.lang.String)
+comment8.params=key
+comment8.target=void\ setKey(java.lang.String)
+numComments=9
