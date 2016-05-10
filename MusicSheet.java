@@ -1,14 +1,15 @@
 import java.io.Serializable;
 
 /**
- * Write a description of class MusicSheet here.
+ * An object which describes a music sheet. Contains the key, title, tempo, mode, and the primary 
+ * key of the music sheet.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Tong) 
+ * @version (10 May 2016)
  */
 public class MusicSheet implements Serializable
 {
-    /** description of instance variable x (add comment for each instance variable) */
+    // Variables which describe the music sheet object
     private String key;
     private String title;
     private String tempo;
@@ -16,7 +17,9 @@ public class MusicSheet implements Serializable
     private int primaryKey;
 
     /**
-     * Default constructor for objects of class MusicSheet
+     * constructor for objects of class MusicSheet
+     * 
+     * takes in a key, title, tempo, mode, and primary key and assigns them to instance variables
      */
     public MusicSheet(String key , String title , String tempo , String mode,int primarykey)
     {
@@ -29,15 +32,10 @@ public class MusicSheet implements Serializable
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     *    that describes the operation of the method
+     * Gets the tempo of the music sheet
      *
-     * @pre        preconditions for the method
-     *            (what the method assumes about the method's parameters and class's state)
-     * @post    postconditions for the method
-     *            (what the method guarantees upon completion)
-     * @param    y    description of parameter y
-     * @return    description of the return value
+     * @post   Gets the tempo of the music sheet
+     * @return    returns the tempo of the music sheet as a String
      */
     public String getTempo()
     {
@@ -45,54 +43,113 @@ public class MusicSheet implements Serializable
         return this.tempo;
     }
     
+    /**
+     * Gets the key of the music sheet
+     *
+     * @post   Gets the key of the music sheet
+     * @return    returns the key of the music sheet as a String
+     */
     public String getKey()
     {
         return this.key;
     }
     
+    /**
+     * Gets the title of the music sheet
+     *
+     * @post   Gets the title of the music sheet
+     * @return    returns the title of the music sheet as a String
+     */
     public String getTitle()
     {
         return this.title;
     }
     
+    /**
+     * Gets the mode of the music sheet
+     *
+     * @post   Gets the mode of the music sheet (major/minor)
+     * @return    returns the mode of the music sheet as a String
+     */
     public String getMode()
     {
         return this.mode;
     }
     
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
-    public void setTempo(String tempo)
-    {
-        this.tempo = tempo;
-    }
-    public void setMode(String mode)
-    {
-        this.mode = mode;
-    }
-    public void setKey(String key)
-    {
-        this.key = key;
-    }
-    public void setPrimaryKey()
-    {
-        this.primaryKey++;
-    }
+    /**
+     * Gets the title of the music sheet
+     *
+     * @post   Gets the primary key of the music sheet
+     */
     public int getPrimaryKey()
     {
         return this.primaryKey;
     }
+    
+    /**
+     * Sets the title of the music sheet
+     *
+     * @post   sets the title of the music sheet
+     */
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+    
+    /**
+     * Sets the tempo of the music sheet
+     *
+     * @post   sets the tempo of the music sheet
+     */
+    public void setTempo(String tempo)
+    {
+        this.tempo = tempo;
+    }
+    
+    /**
+     * Sets the mode (major/minor) of the music sheet
+     *
+     * @post   sets the mode of the music sheet
+     */
+    public void setMode(String mode)
+    {
+        this.mode = mode;
+    }
+    
+    /**
+     * Sets the key of the music sheet
+     *
+     * @post   sets the key of the music sheet
+     */
+    public void setKey(String key)
+    {
+        this.key = key;
+    }
+    
+    /**
+     * Sets the primary key of the music sheet
+     *
+     * @post   sets the primary key of the music sheet
+     */
+    public void setPrimaryKey()
+    {
+        this.primaryKey++;
+    }
+    
+    /**
+     * Overrides the object toString() method 
+     *
+     * @post   puts the information of the music sheet object into String form
+     */
     @Override
     public String toString() {
-    	   return new StringBuffer("")
-    	   .append(this.primaryKey+"   ")
-    	   .append(this.title+"    ")
-    	   .append(this.mode+" ")
-    	   .append(this.key+"  ")
-    	   .append(this.tempo).toString();
-    	  
-	   }
+           return new StringBuffer("")
+           .append(this.primaryKey+"   ")
+           .append(this.title+"    ")
+           .append(this.mode+" ")
+           .append(this.key+"  ")
+           .append(this.tempo).toString();
+          
+       }
 }
 

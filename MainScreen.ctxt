@@ -1,17 +1,23 @@
 #BlueJ class context
 comment0.params=
 comment0.target=MainScreen()
-comment0.text=\r\n\ Default\ constructor\ for\ objects\ of\ class\ Viewer\r\n
+comment0.text=\r\n\ Constructor\ for\ the\ class\ Viewer,\ which\ sets\ up\ the\ frame.\r\n
 comment1.params=musicSheet
 comment1.target=void\ addMusicSheet(MusicSheet)
+comment1.text=\r\n\ Method\ which\ is\ able\ to\ add\ a\ music\ sheet\ object\ from\ another\ window\ to\ the\ master\ array\ list\r\n\r\n\ @post\ \ \ \ add\ a\ music\ sheet\ object\ from\ another\ window\ to\ the\ master\ array\ list\r\n\ \ \ \ \ \ \ \ \ \ \r\n\ @param\ \ \ musicSheet\ \ \ a\ MusicSheet\ object\r\n
 comment2.params=
 comment2.target=java.util.ArrayList\ getMusicList()
+comment2.text=\r\n\ Method\ which\ is\ able\ to\ get\ the\ master\ array\ list\r\n\r\n\ @post\ \ \ \ get\ the\ master\ array\ list\ \r\n\ \ \ \ \ \ \ \ \ \ \r\n
 comment3.params=args
 comment3.target=void\ main(java.lang.String[])
+comment3.text=\r\n\ Main\ method\ of\ Viewer\ class\ which\ creates\ a\ new\ MainScreen\ object\r\n\r\n\ @post\ \ \ \ creates\ a\ new\ mainscreen\ object\r\n\ \ \ \ \ \ \ \ \ \ \r\n
 comment4.params=
 comment4.target=int\ getNextPrimaryKey()
+comment4.text=\r\n\ Method\ which\ is\ able\ to\ get\ the\ primary\ key\ of\ the\ music\ sheet\ object\r\n\r\n\ @post\ \ \ \ get\ the\ primary\ key\ of\ the\ music\ sheet\ object\r\n\ \ \ \ \ \ \ \ \ \ \r\n
 comment5.params=
 comment5.target=void\ serializeMusicSheetList()
+comment5.text=\r\n\ Method\ which\ is\ able\ to\ serialize\ the\ music\ sheet\ list\r\n\r\n\ @post\ \ \ \ serialize\ the\ music\ sheet\ list\r\n\ \ \ \ \ \ \ \ \ \ \r\n
 comment6.params=
 comment6.target=void\ deserializeMusicSheetList()
+comment6.text=\r\n\ Method\ which\ is\ able\ to\ deserialize\ the\ music\ sheet\ list\r\n\r\n\ @post\ \ \ \ deserialize\ the\ music\ sheet\ list\r\n\ \ \ \ \ \ \ \ \ \ \r\n
 numComments=7

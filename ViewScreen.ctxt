@@ -1,5 +1,5 @@
 #BlueJ class context
 comment0.params=mainScreen\ viewType\ searchKey
 comment0.target=ViewScreen(MainScreen,\ java.lang.String,\ java.lang.String)
-comment0.text=\r\n\ Default\ constructor\ for\ objects\ of\ class\ View\r\n
+comment0.text=\r\n\ constructor\ for\ objects\ of\ class\ View\r\n
 numComments=1
