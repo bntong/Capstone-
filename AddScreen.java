@@ -15,70 +15,75 @@ public class AddScreen extends JFrame implements ActionListener
     /** description of instance variable x (add comment for each instance variable) */
     private static final int FRAME_WIDTH = 300;
     private static final int FRAME_HEIGHT = 300;
-    
+
     private JButton ok;
-    
+
     private MusicSheet musicSheet;
-    
+
     private JPanel panel = new JPanel();
     private JLabel titleQuestion;
     private JLabel keyQuestion;
     private JLabel tempoQuestion;
     private JLabel modeQuestion;
-    
+
     private String pieceTitle = "No Title";
     private String tempo = "0";
     private String key = "C";
     private String mode = "None";
     private String str;
-    
+
     private JTextField titleField = new JTextField(15);
     private JTextField tempoField = new JTextField(15);
 
     private String[] keys = {"C" , "G" , "D" , "A" , "E" , "B" , "F#" , "C#" , "F" , "Bb" , "Eb" , "Ab" , "Db" , "Gb" , "Cb"};
     private JComboBox keyCmbList = new JComboBox(keys);
-    private String[] majMin = {"Major" , "Minor"};
+    private String[] majMin = {"None", "Major" , "Minor"};
     private JComboBox majMinCmb = new JComboBox(majMin);
-    private int selectedRowNum=-1;
-    
+    private int primaryKeyToEdit = -1;
+   
+
     private MainScreen mainScreen;
     /**
      * Default constructor for objects of class Add
      */
-    public AddScreen(MainScreen mainScreen,int rownum , String str)
+    public AddScreen(MainScreen mainScreen,int primaryKeyToEdit , String str)
     {
         panel.setLayout(new FlowLayout(-2));
-        
+
+        this.primaryKeyToEdit = primaryKeyToEdit;
         this.str = str;
         this.mainScreen = mainScreen;
-        
+
         this.setTitle("Add Screen");
         this.titleQuestion = new JLabel("Title of the piece:");
         this.tempoQuestion = new JLabel("Tempo: (40-216)");
         this.modeQuestion = new JLabel("Major/Minor");
         this.keyQuestion = new JLabel("Key:");
-        
+
         this.ok = new JButton("Ok");
         this.ok.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
-                if (selectedRowNum < 0 )
-                { 
-                    musicSheet = new MusicSheet(getKey() , getPieceTitle() , getTempo() , getMode());
-                    mainScreen.addMusicSheet(musicSheet);
-                }
-                else
+                public void actionPerformed(ActionEvent e)
                 {
-                    ArrayList<MusicSheet> musiclist = mainScreen.getMusicList();
-                    musiclist.get(selectedRowNum).setTitle(getPieceTitle());
-                    musiclist.get(selectedRowNum).setTempo(getTempo());
-                    musiclist.get(selectedRowNum).setMode(getMode());
-                    musiclist.get(selectedRowNum).setKey(getKey());
+                    if (primaryKeyToEdit < 0 )
+                    { 
+                        musicSheet = new MusicSheet(getKey() , getPieceTitle() , getTempo() , getMode(),mainScreen.getNextPrimaryKey());
+                        mainScreen.addMusicSheet(musicSheet);
+                        mainScreen.serializeMusicSheetList();
+                    }
+                    else
+                    {
+                        int musicsheetIndex = getMusicSheetIndexToEdit();
+                        ArrayList<MusicSheet> musiclist = mainScreen.getMusicList();
+                        musiclist.get(musicsheetIndex).setTitle(getPieceTitle());
+                        musiclist.get(musicsheetIndex).setTempo(getTempo());
+                        musiclist.get(musicsheetIndex).setMode(getMode());
+                        musiclist.get(musicsheetIndex).setKey(getKey());
+                        mainScreen.serializeMusicSheetList();
+                    }
+                    dispose();
                 }
-                dispose();
-            }
-        });
-        
+            });
+
         this.tempo = tempoField.getText();
         this.pieceTitle = titleField.getText();
 
@@ -87,49 +92,27 @@ public class AddScreen extends JFrame implements ActionListener
 
         majMinCmb.setSelectedIndex(0);
         majMinCmb.addActionListener(this);
+
         
-        if (rownum > 0)
+        if (primaryKeyToEdit >= 0 )
         {
-            rownum--;
-            selectedRowNum = rownum;
-            ArrayList<MusicSheet> musiclist = this.mainScreen.getMusicList();
-            if (rownum >=0 && rownum < musiclist.size())
+            int musicsheetIndex = getMusicSheetIndexToEdit();
+            if (musicsheetIndex < 0)
             {
-                this.titleField.setText(musiclist.get(rownum).getTitle());
-                this.tempoField.setText(musiclist.get(rownum).getTempo());
-                this.majMinCmb.setSelectedItem(musiclist.get(rownum).getMode());
-                this.keyCmbList.setSelectedItem(musiclist.get(rownum).getKey());
+                 ErrorMessage err = new ErrorMessage();
+                 dispose();
+                 return;
+            }
+            else
+            {
+                MusicSheet musicsheet = this.mainScreen.getMusicList().get(musicsheetIndex);
+                this.titleField.setText(musicsheet.getTitle());
+                this.tempoField.setText(musicsheet.getTempo());
+                this.majMinCmb.setSelectedItem(musicsheet.getMode());
+                this.keyCmbList.setSelectedItem(musicsheet.getKey());
             }
         }
-        else if(!str.equals(" "))
-        {
-            ArrayList<MusicSheet> musicList = this.mainScreen.getMusicList();
-            ArrayList<MusicSheet> tempList = new ArrayList<MusicSheet>();
-            String keyword = str;
-            ArrayList<String> substrings = new ArrayList<String>();
-            for(int i = 0; i < keyword.length(); i++)
-            {
-                for(int j = 1; i <= keyword.length()-i; j++)
-                {
-                    String sub = keyword.substring(i , j+1);
-                    substrings.add(sub);
-                }
-            }
-            
-            for(int i = 0; i < musicList.size(); i++)
-            {
-                if(musicList.get(i).equals(substrings.get(i)))
-                {
-                    tempList.add(musicList.get(i));
-                }
-            }
-            
-            SearchViewScreen searchViewScreen = new SearchViewScreen(tempList);
-        }
-        
-            
-        
-        
+   
         panel.setLayout(new FlowLayout(-2));
         panel.add(titleQuestion);
         panel.add(titleField);
@@ -140,7 +123,7 @@ public class AddScreen extends JFrame implements ActionListener
         panel.add(keyQuestion);
         panel.add(keyCmbList);
         panel.add(ok);
-        
+
         this.add(panel);
         this.setSize(FRAME_WIDTH , FRAME_HEIGHT);
         this.setVisible(true);
@@ -200,9 +183,9 @@ public class AddScreen extends JFrame implements ActionListener
                 default: mode = "None";
             }
         }
-        
+
     }
-    
+
     public String getPieceTitle()
     {
         this.pieceTitle = titleField.getText();
@@ -214,20 +197,34 @@ public class AddScreen extends JFrame implements ActionListener
         this.tempo = tempoField.getText();
         return this.tempo;
     }
-    
+
     public String getKey()
     {
         return this.key;
     }
-    
+
     public String getMode()
     {
         return this.mode;
     }
-    
+
     public MusicSheet getMusicSheet()
     {
         return musicSheet;
     }
+
+    public int getMusicSheetIndexToEdit()
+    {
+        ArrayList<MusicSheet> musiclist = this.mainScreen.getMusicList();
+         for(int i = 0; i < musiclist.size(); i++)
+            {
+                if(musiclist.get(i).getPrimaryKey() == this.primaryKeyToEdit)
+                {
+                   return i;
     
+                }
+                
+            }
+         return -1;
+    }
 }

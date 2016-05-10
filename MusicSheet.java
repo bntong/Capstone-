@@ -1,4 +1,4 @@
-
+import java.io.Serializable;
 
 /**
  * Write a description of class MusicSheet here.
@@ -6,7 +6,7 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class MusicSheet
+public class MusicSheet implements Serializable
 {
     /** description of instance variable x (add comment for each instance variable) */
     private String key;
@@ -18,13 +18,14 @@ public class MusicSheet
     /**
      * Default constructor for objects of class MusicSheet
      */
-    public MusicSheet(String key , String title , String tempo , String mode)
+    public MusicSheet(String key , String title , String tempo , String mode,int primarykey)
     {
         // initialise instance variables
         this.key = key;
         this.title = title;
         this.tempo = tempo;
         this.mode = mode;
+        this.primaryKey = primarykey;
     }
 
     /**
@@ -75,6 +76,23 @@ public class MusicSheet
     {
         this.key = key;
     }
-
+    public void setPrimaryKey()
+    {
+        this.primaryKey++;
+    }
+    public int getPrimaryKey()
+    {
+        return this.primaryKey;
+    }
+    @Override
+    public String toString() {
+    	   return new StringBuffer("")
+    	   .append(this.primaryKey+"   ")
+    	   .append(this.title+"    ")
+    	   .append(this.mode+" ")
+    	   .append(this.key+"  ")
+    	   .append(this.tempo).toString();
+    	  
+	   }
 }
 

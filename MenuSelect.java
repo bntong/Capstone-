@@ -15,8 +15,9 @@ public class MenuSelect extends JPanel
     private JButton add;
     private JButton view;
     private JButton edit;
-    private JTextField rownum;
-    private JTextField search;
+    private JButton search;
+    private JTextField primaryKeyTextField;
+    private JTextField searchText;
     private JLabel editquestion;
     private JLabel question;
     private JLabel searchQuestion;
@@ -34,24 +35,27 @@ public class MenuSelect extends JPanel
         this.add = new JButton("Add");
         this.view = new JButton("View");
         this.edit = new JButton("Edit");
-        this.rownum = new JTextField(15);
-        this.search = new JTextField(15);
+        this.search = new JButton("Search");
+        this.primaryKeyTextField = new JTextField(15);
+        this.searchText = new JTextField(15);
         
         this.question = new JLabel("What would you like to do?");
         this.editquestion = new JLabel("Which index would you like to edit?");
-        this.searchQuestion = new JLabel("Search by keyword:");
+        this.searchQuestion = new JLabel("Search title by keyword:");
         
         this.add.addActionListener(new Add());
         this.view.addActionListener(new View());
         this.edit.addActionListener(new Update());
+        this.search.addActionListener(new Search());
 
         this.add(this.question);
         this.add(this.add);
         this.add(this.view);
         this.add(this.editquestion);
         this.add(this.edit);
-        this.add(this.rownum);
+        this.add(this.primaryKeyTextField);
         this.add(this.searchQuestion);
+        this.add(this.searchText);
         this.add(this.search);
 
     }
@@ -68,7 +72,7 @@ public class MenuSelect extends JPanel
     {
         public void actionPerformed(ActionEvent event)
         {
-            AddScreen addScreen = new AddScreen(mainScreen,getRowNum() , getKeyword());
+            AddScreen addScreen = new AddScreen(mainScreen,getPrimaryKey() , getKeyword());
         }
     }
 
@@ -84,16 +88,25 @@ public class MenuSelect extends JPanel
     {
         public void actionPerformed(ActionEvent event)
         {
-            ViewScreen viewScreen = new ViewScreen(mainScreen);
+            ViewScreen viewScreen = new ViewScreen(mainScreen , "View","");
             
         }
     }
     
-    public int getRowNum()
+    public class Search implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event)
+        {
+            ViewScreen viewScreen = new ViewScreen(mainScreen , "Search", searchText.getText());
+            
+        }
+    }
+    
+    public int getPrimaryKey()
     {
         try
         {    
-        String str=rownum.getText();
+        String str=primaryKeyTextField.getText();
         return Integer.parseInt(str);
         }
         catch(Exception e)

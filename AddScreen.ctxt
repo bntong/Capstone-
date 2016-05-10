@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.params=mainScreen\ rownum\ str
+comment0.params=mainScreen\ primaryKeyToEdit\ str
 comment0.target=AddScreen(MainScreen,\ int,\ java.lang.String)
 comment0.text=\r\n\ Default\ constructor\ for\ objects\ of\ class\ Add\r\n
 comment1.params=e
@@ -16,4 +16,6 @@ comment6.params=
 comment6.target=java.lang.String\ getMode()
 comment7.params=
 comment7.target=MusicSheet\ getMusicSheet()
-numComments=8
+comment8.params=
+comment8.target=int\ getMusicSheetIndexToEdit()
+numComments=9
