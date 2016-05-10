@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
+@SuppressWarnings("unchecked")
 /**
  * Write a description of class Viewer here.
  * 
