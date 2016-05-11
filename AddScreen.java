@@ -15,38 +15,38 @@ public class AddScreen extends JFrame implements ActionListener
     // Width and height of the frame
     private static final int FRAME_WIDTH = 300;
     private static final int FRAME_HEIGHT = 300;
-    
+
     // Button which the user can press if he/she is done with the information of the music sheet object
     private JButton ok;
-    
+
     // Instance of music sheet object
     private MusicSheet musicSheet;
-    
+
     // variables which asks the user about the information they wish to enter
     private JPanel panel = new JPanel();
     private JLabel titleQuestion;
     private JLabel keyQuestion;
     private JLabel tempoQuestion;
     private JLabel modeQuestion;
-    
+
     // Default variables of the music sheet object if the user does not enter in anything in the add screen
     private String pieceTitle = "No Title";
     private String tempo = "0";
     private String key = "C";
     private String mode = "None";
     private String str;
-    
+
     // text fields of the title and the tempo of the Music Sheet object
     private JTextField titleField = new JTextField(15);
     private JTextField tempoField = new JTextField(15);
-    
+
     // Combo boxes of of the major or minor selection and the key selection
     private String[] keys = {"C" , "G" , "D" , "A" , "E" , "B" , "F#" , "C#" , "F" , "Bb" , "Eb" , "Ab" , "Db" , "Gb" , "Cb"};
     private JComboBox keyCmbList = new JComboBox(keys);
     private String[] majMin = {"None", "Major" , "Minor"};
     private JComboBox majMinCmb = new JComboBox(majMin);
     private int primaryKeyToEdit = -1;
-    
+
     // instance of the Main screen so the information from the mainscreen can be passed into the add screen
     private MainScreen mainScreen;
     /**
@@ -65,7 +65,7 @@ public class AddScreen extends JFrame implements ActionListener
         this.tempoQuestion = new JLabel("Tempo: (40-216)");
         this.modeQuestion = new JLabel("Major/Minor");
         this.keyQuestion = new JLabel("Key:");
-        
+
         // a music sheet is added to the master array list
         this.ok = new JButton("Ok");
         this.ok.addActionListener(new ActionListener() {
@@ -73,9 +73,9 @@ public class AddScreen extends JFrame implements ActionListener
                 {
                     if (primaryKeyToEdit < 0 )
                     { 
-                        musicSheet = new MusicSheet(getKey() , getPieceTitle() , getTempo() , getMode(),mainScreen.getNextPrimaryKey()+1);
+                        musicSheet = new MusicSheet(getKey() , getPieceTitle() , getTempo() , getMode(),mainScreen.getNextPrimaryKey());
                         mainScreen.addMusicSheet(musicSheet);
-                         mainScreen.serializeMusicSheetList();
+                        mainScreen.serializeMusicSheetList();
                     }
                     else
                     {
@@ -90,16 +90,20 @@ public class AddScreen extends JFrame implements ActionListener
                     dispose();
                 }
             });
-
+        // assigns the tempo and the pieceTitle to the instance variables of this class   
         this.tempo = tempoField.getText();
         this.pieceTitle = titleField.getText();
-
+        
+        // Combo box of this class, and determines the key of the music sheet object
         keyCmbList.setSelectedIndex(0);
         keyCmbList.addActionListener(this);
-
+        
+        // Another combo box, and determines the mode of the music sheet object (major/minor)
         majMinCmb.setSelectedIndex(0);
         majMinCmb.addActionListener(this);
-
+        
+        // takes in the primary key that the user inputs and searches the array list for the music sheet that the user wants to edit.
+        // if the key is not found, an error message appears
         if (primaryKeyToEdit >= 0 )
         {
             int musicsheetIndex = getMusicSheetIndexToEdit();
@@ -118,7 +122,8 @@ public class AddScreen extends JFrame implements ActionListener
                 this.keyCmbList.setSelectedItem(musicsheet.getKey());
             }
         }
-
+        
+        // adding all itemes to the JFrame
         panel.setLayout(new FlowLayout(-2));
         panel.add(titleQuestion);
         panel.add(titleField);
@@ -134,7 +139,8 @@ public class AddScreen extends JFrame implements ActionListener
         this.setSize(FRAME_WIDTH , FRAME_HEIGHT);
         this.setVisible(true);
     }
-
+    
+    // combo box of the key combo list
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == keyCmbList)
@@ -176,6 +182,7 @@ public class AddScreen extends JFrame implements ActionListener
                 default: key = "C";
             }
         }
+        /** combo box of the major or minor combo box **/
         else if(e.getSource() == majMinCmb)
         {
             JComboBox cb = (JComboBox)e.getSource();
@@ -191,34 +198,70 @@ public class AddScreen extends JFrame implements ActionListener
         }
 
     }
-
+    
+    /**
+     * Gets the piece title of the music sheet
+     * 
+     * @post gets the piece title of the music sheet
+     * @return returns the piece title of the music sheet as a String
+     */
     public String getPieceTitle()
     {
         this.pieceTitle = titleField.getText();
         return this.pieceTitle;
     }
-
+    
+    /**
+     * Gets the tempo of the music sheet
+     * 
+     * @post gets the tempo of the music sheet
+     * @return returns the tempo of the music sheet as a String
+     */
     public String getTempo()
     {
         this.tempo = tempoField.getText();
         return this.tempo;
     }
-
+    
+    /**
+     * Gets the key of the music sheet
+     * 
+     * @post gets the key of the music sheet
+     * @return returns the key of the music sheet as a String
+     */
     public String getKey()
     {
         return this.key;
     }
-
+    
+    /**
+     * Gets the mode (major/minor) of the music sheet
+     * 
+     * @post gets the mode of the music sheet
+     * @return returns the mode of the music sheet as a String
+     */
     public String getMode()
     {
         return this.mode;
     }
-
+    
+    /**
+     * Gets the music sheet
+     * 
+     * @post gets the music sheet
+     * @return returns the music sheet as a MusicSheet object
+     */
     public MusicSheet getMusicSheet()
     {
         return musicSheet;
     }
-
+    
+    /**
+     * Gets the primary key of the music sheet that the user wants to edit
+     * 
+     * @post gets primary key of the music sheet that the user wants to edit
+     * @return returns primary key of the music sheet that the user wants to edit as a int
+     */
     public int getMusicSheetIndexToEdit()
     {
         ArrayList<MusicSheet> musiclist = this.mainScreen.getMusicList();

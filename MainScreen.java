@@ -25,7 +25,7 @@ public class MainScreen extends JFrame
     // Creates an instance of MenuSelect, or the options for the music sheet database
     private MenuSelect menu;
     // A sort of ID that is associated with a MusicSheet Object
-    private int nextprimarykey=0;
+    private int nextprimarykey;
     // The master array list where every music sheet object is stored
     private ArrayList<MusicSheet> musicList = new ArrayList<MusicSheet>();
     /**
@@ -88,7 +88,7 @@ public class MainScreen extends JFrame
     {
         return ++nextprimarykey;
     }
-    
+
     /**
      * Method which is able to serialize the music sheet list
      *
@@ -109,7 +109,7 @@ public class MainScreen extends JFrame
             ex.printStackTrace();
         }
     }
-    
+
     /**
      * Method which is able to deserialize the music sheet list
      *
@@ -130,6 +130,12 @@ public class MainScreen extends JFrame
         {
             ex.printStackTrace();
         }
+        if (musicList.size()>0)
+        {
+            nextprimarykey = musicList.get(musicList.size()-1).getPrimaryKey();
+        }
+        else
+            nextprimarykey = 0;
     }
 
 }

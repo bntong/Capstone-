@@ -144,7 +144,7 @@ public class MusicSheet implements Serializable
     @Override
     public String toString() {
            return new StringBuffer("")
-           .append(this.primaryKey+"   ")
+           .append(this.primaryKey+"  ")
            .append(this.title+"    ")
            .append(this.mode+" ")
            .append(this.key+"  ")

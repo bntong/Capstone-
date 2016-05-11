@@ -16,10 +16,13 @@ public class MenuSelect extends JPanel
     private JButton view;
     private JButton edit;
     private JButton search;
+    private JButton delete;
 
-    // Text fields that can be used to find a music sheet object or to edit one directly by entering in the primary key of the
+    // Text fields that can be used to find a music sheet object or to edit one directly by entering in the primary key of the Music Sheet
     private JTextField primaryKeyTextField;
     private JTextField searchText;
+    private JTextField deleteText;
+    private JLabel deleteQuestion;
     private JLabel editquestion;
     private JLabel question;
     private JLabel searchQuestion;
@@ -38,19 +41,24 @@ public class MenuSelect extends JPanel
         this.view = new JButton("View");
         this.edit = new JButton("Edit");
         this.search = new JButton("Search");
+        this.delete = new JButton("Delete");
+        
         this.primaryKeyTextField = new JTextField(15);
+        this.deleteText = new JTextField(15);
         this.searchText = new JTextField(15);
 
         // labels to ask the user specific questions 
         this.question = new JLabel("What would you like to do?");
         this.editquestion = new JLabel("Which index would you like to edit?");
         this.searchQuestion = new JLabel("Search title by keyword:");
+        this.deleteQuestion = new JLabel("Which index would you like to delete?");
 
         // adds action listeners to all the buttons
         this.add.addActionListener(new Add());
         this.view.addActionListener(new View());
         this.edit.addActionListener(new Update());
         this.search.addActionListener(new Search());
+        this.delete.addActionListener(new Delete());
 
         this.add(this.question);
         this.add(this.add);
@@ -61,7 +69,9 @@ public class MenuSelect extends JPanel
         this.add(this.searchQuestion);
         this.add(this.searchText);
         this.add(this.search);
-
+        this.add(this.deleteQuestion);
+        this.add(this.deleteText);
+        this.add(this.delete);
     }
 
     // takes the user to the add screen
@@ -101,7 +111,14 @@ public class MenuSelect extends JPanel
 
         }
     }
-
+    
+    public class Delete implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event)
+        {
+            ViewScreen viewScreen = new ViewScreen(mainScreen , "Delete" , deleteText.getText());
+        }
+    }
     /*
      * Gets the primary key of the music sheet
      * 

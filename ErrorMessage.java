@@ -9,21 +9,20 @@ import java.util.*;
  */
 public class ErrorMessage extends JFrame
 {
-    // instance variables - replace the example below with your own
+    // width and height of the frame
     private static final int FRAME_WIDTH = 100;
     private static final int FRAME_HEIGHT = 100;
-    
+    // JLabel which has the error message
     private JLabel errorMessage;
 
     /**
-     * Constructor for objects of class ErrorMessage
+     * Constructor for objects of class ErrorMessage which makes the error message
      */
     public ErrorMessage()
     {
         this.setLayout(new FlowLayout(-2));
         this.setSize(FRAME_WIDTH , FRAME_HEIGHT);
         this.setTitle("Error Message");
-        // this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.errorMessage = new JLabel("Error: Invalid ID");
         this.add(errorMessage);
         this.setVisible(true);

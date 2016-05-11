@@ -13,10 +13,10 @@ public class ViewScreen extends JFrame
     // Width and height of frame
     private static final int FRAME_WIDTH = 500;
     private static final int FRAME_HEIGHT = 500;
-    
+
     // table which contains the music sheet objects and its information
     private JTable musicTable;
-    
+
     // instance of main screen so it can get information from the original main screen
     private MainScreen mainScreen;
 
@@ -35,7 +35,7 @@ public class ViewScreen extends JFrame
         this.setSize(FRAME_WIDTH , FRAME_HEIGHT);
         this.setTitle("Music Sheet Sorter");
         this.setVisible(true);
-        
+
         // if view type is "view" then all the music sheet objects are displayed
         Object[][] viewData,searchData;
         if(viewType.equals("View"))
@@ -53,7 +53,7 @@ public class ViewScreen extends JFrame
             this.add(table.getTableHeader(), BorderLayout.NORTH);
             this.add(table , BorderLayout.CENTER);
         }
-        
+
         // if view type is "search" then the keyword that the user inputs is then used to search through
         // the master array list to find any title that contains the keyword. It then displays the objects found.
         if (viewType.equals("Search"))
@@ -63,7 +63,7 @@ public class ViewScreen extends JFrame
             {
                 String str = searchKey.trim();
                 str = str.toLowerCase();
-                
+
                 int j = 0;
                 for (int i = 0; i < musicList.size(); i++)
                 {
@@ -78,7 +78,7 @@ public class ViewScreen extends JFrame
                         j++;
                     }
                 }
-                
+
                 searchData = new Object[j][5];
                 for (int i=0; i < j; i++)
                 {
@@ -92,9 +92,46 @@ public class ViewScreen extends JFrame
                 this.add(table.getTableHeader(), BorderLayout.NORTH);
                 this.add(table , BorderLayout.CENTER);
             }
-            
+
         }
-        
+        // if viewtype is "delete" then the primary key that the user inputs is used to delete the 
+        // music sheet object specified
+        if(viewType.equals("Delete"))
+        {
+            int key = -1;
+            try
+            {
+                key = Integer.parseInt(searchKey);
+            }
+            catch(Exception e)
+            {
+                key = -1;
+            }
+            Iterator<MusicSheet> musicItr = musicList.iterator();
+            while(musicItr.hasNext())
+            {
+                MusicSheet musicSheet = musicItr.next();
+                if(musicSheet.getPrimaryKey() == key)
+                {
+                    musicItr.remove();
+                }
+            }
+            mainScreen.serializeMusicSheetList();
+            viewData  = new Object[mainScreen.getMusicList().size()][5];
+            for(int i = 0; i < musicList.size(); i++)
+            {
+                viewData[i][0] = musicList.get(i).getPrimaryKey();
+                viewData[i][1] = musicList.get(i).getTitle();
+                viewData[i][2] = musicList.get(i).getKey();
+                viewData[i][3] = musicList.get(i).getMode();
+                viewData[i][4] = musicList.get(i).getTempo();
+            }
+
+            JTable table = new JTable(viewData , columnNames);
+            this.add(table.getTableHeader(), BorderLayout.NORTH);
+            this.add(table , BorderLayout.CENTER);
+
+        }
     }
 
 }
